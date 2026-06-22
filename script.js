@@ -1,19 +1,17 @@
-/* Meritage Website - Interactive Features */
+/* Meritage Website v2 - Interactive Features */
+/* Clone of meritage.vc - smooth, polished UX */
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ==================== HEADER SCROLL ====================
+  // ==================== HEADER SCROLL EFFECT ====================
   const header = document.getElementById('header');
-  let lastScroll = 0;
 
   window.addEventListener('scroll', function() {
-    const y = window.scrollY;
-    if (y > 50) {
+    if (window.scrollY > 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-    lastScroll = y;
   });
 
   // ==================== MOBILE MENU ====================
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = mobileOverlay.classList.contains('open') ? 'hidden' : '';
   });
 
-  // Close mobile menu on link click
   mobileOverlay.querySelectorAll('a').forEach(function(link) {
     link.addEventListener('click', function() {
       mobileToggle.classList.remove('open');
@@ -41,132 +38,178 @@ document.addEventListener('DOMContentLoaded', function() {
 
   tabBtns.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      const tab = this.getAttribute('data-tab');
+      const tabId = this.getAttribute('data-tab');
 
       // Deactivate all
       tabBtns.forEach(function(b) {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
       });
-      tabPanels.forEach(function(p) { p.classList.remove('active'); });
+      tabPanels.forEach(function(p) {
+        p.classList.remove('active');
+      });
 
-      // Activate current
+      // Activate clicked
       this.classList.add('active');
       this.setAttribute('aria-selected', 'true');
-      document.getElementById('tab-' + tab).classList.add('active');
+      document.querySelector('.tab-panel[data-panel="' + tabId + '"]').classList.add('active');
     });
   });
 
   // ==================== TESTIMONIALS CAROUSEL ====================
-  const carousel = document.getElementById('testimonialCarousel');
-  const slides = carousel.querySelectorAll('.carousel-slide');
-  const prevBtn = carousel.querySelector('.carousel-prev');
-  const nextBtn = carousel.querySelector('.carousel-next');
-  const dotsContainer = carousel.querySelector('.carousel-dots');
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
   let currentSlide = 0;
-  let autoInterval;
-
-  // Create dots
-  slides.forEach(function(_, i) {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Show slide ' + (i + 1) + ' of ' + slides.length);
-    dot.addEventListener('click', function() { goToSlide(i); });
-    dotsContainer.appendChild(dot);
-  });
+  const totalSlides = dots.length;
+  let autoplayInterval;
 
   function goToSlide(index) {
-    slides.forEach(function(s, i) {
-      s.classList.toggle('active', i === index);
-    });
-    dotsContainer.querySelectorAll('.carousel-dot').forEach(function(d, i) {
-      d.classList.toggle('active', i === index);
-    });
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
     currentSlide = index;
-    resetAutoPlay();
+    track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    dots.forEach(function(dot, i) {
+      dot.classList.toggle('active', i === currentSlide);
+    });
   }
 
-  function nextSlide() {
-    goToSlide((currentSlide + 1) % slides.length);
+  function nextSlide() { goToSlide(currentSlide + 1); }
+  function prevSlide() { goToSlide(currentSlide - 1); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayInterval = setInterval(nextSlide, 5000);
   }
 
-  function prevSlide() {
-    goToSlide((currentSlide - 1 + slides.length) % slides.length);
+  function stopAutoplay() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
   }
 
-  function resetAutoPlay() {
-    clearInterval(autoInterval);
-    autoInterval = setInterval(nextSlide, 5000);
-  }
+  // Dot click
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      stopAutoplay();
+      goToSlide(parseInt(this.getAttribute('data-slide')));
+      startAutoplay();
+    });
+  });
 
-  prevBtn.addEventListener('click', prevSlide);
-  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', function() {
+    stopAutoplay();
+    prevSlide();
+    startAutoplay();
+  });
 
-  // Start autoplay
-  autoInterval = setInterval(nextSlide, 5000);
+  nextBtn.addEventListener('click', function() {
+    stopAutoplay();
+    nextSlide();
+    startAutoplay();
+  });
 
   // Pause on hover
-  carousel.addEventListener('mouseenter', function() { clearInterval(autoInterval); });
-  carousel.addEventListener('mouseleave', function() { resetAutoPlay(); });
+  const carousel = document.querySelector('.carousel-container');
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
 
-  // ==================== SMOOTH SCROLL WITH HEADER OFFSET ====================
+  startAutoplay();
+
+  // ==================== FAQ ACCORDION ====================
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(function(item) {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', function() {
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      faqItems.forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Toggle clicked
+      if (!isOpen) {
+        item.classList.add('open');
+        question.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ==================== SCROLL ANIMATIONS ====================
+  const fadeElements = document.querySelectorAll('.fade-in');
+
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  fadeElements.forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
   document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
       const target = document.querySelector(this.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      const headerHeight = header.offsetHeight;
-      const targetPos = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
-      window.scrollTo({ top: targetPos, behavior: 'smooth' });
+      if (target) {
+        e.preventDefault();
+        const headerOffset = 80;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     });
   });
 
-  // ==================== FORM VALIDATION ====================
-  const form = document.getElementById('contactForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const requiredFields = form.querySelectorAll('[required]');
+  // ==================== CONTACT FORM ====================
+  const contactForm = document.getElementById('contactForm');
 
-  function checkFormValidity() {
-    let valid = true;
-    requiredFields.forEach(function(field) {
-      if (!field.value.trim()) { valid = false; }
-    });
-    submitBtn.disabled = !valid;
-  }
-
-  requiredFields.forEach(function(field) {
-    field.addEventListener('input', checkFormValidity);
-    field.addEventListener('change', checkFormValidity);
-  });
-
-  // Form submit handler (UI only - no backend)
-  form.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    submitBtn.textContent = 'Sending...';
+
+    const formData = {
+      firstName: document.getElementById('firstName').value,
+      lastName: document.getElementById('lastName').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      company: document.getElementById('company').value,
+      title: document.getElementById('title').value,
+      role: document.getElementById('role').value,
+      interests: Array.from(document.querySelectorAll('input[name="interest"]:checked')).map(function(cb) {
+        return cb.value;
+      }),
+      message: document.getElementById('message').value
+    };
+
+    // Show success state
+    const submitBtn = contactForm.querySelector('.form-submit .btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Message Sent!';
+    submitBtn.style.background = '#28a745';
     submitBtn.disabled = true;
 
-    // Simulate sending (replace with actual form handler)
     setTimeout(function() {
-      var btn = submitBtn;
-      btn.textContent = 'Thank You!';
-      btn.style.background = '#4CAF50';
-      form.querySelectorAll('input, select, textarea').forEach(function(f) { f.value = ''; });
-      setTimeout(function() {
-        btn.textContent = 'Submit';
-        btn.style.background = '';
-        btn.disabled = true;
-      }, 3000);
-    }, 800);
-  });
+      submitBtn.textContent = originalText;
+      submitBtn.style.background = '';
+      submitBtn.disabled = false;
+      contactForm.reset();
+    }, 3000);
 
-  // ==================== FAQ ACCORDION ====================
-  // Native <details>/<summary> handles this natively.
-  // Click handlers for analytics if needed.
-  document.querySelectorAll('.faq-question').forEach(function(q) {
-    q.addEventListener('click', function() {
-      // Native details/summary handles the toggling
-    });
+    console.log('Form submitted:', formData);
+    // In production, this would POST to a backend endpoint
   });
-
-  console.log('Meritage site initialized');
 });
