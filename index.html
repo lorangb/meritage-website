@@ -15,7 +15,10 @@
   <!-- ========== HEADER ========== -->
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a href="/" class="logo">Meritage<span>.</span></a>
+      <a href="/" class="logo">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/6935e037a247903b7201b0e8_Meritage%20Dark.svg" alt="Meritage" class="logo-dark" style="height:28px;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/6935e037676adbb0831c2eea_Meritage%20White.svg" alt="Meritage" class="logo-light" style="height:28px;display:none;">
+      </a>
       <nav class="main-nav" id="mainNav">
         <a href="#how-we-help" class="nav-link">How We Help</a>
         <a href="#who-we-help" class="nav-link">Who We Help</a>
@@ -43,7 +46,8 @@
   </div>
 
   <!-- ========== HERO ========== -->
-  <section class="hero">
+  <section class="hero" style="background-image:url('https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/693e6f773a0d8f97b1286190_morningflatirons.webp');background-size:cover;background-position:center;position:relative;">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(23,32,49,0.92) 0%, rgba(23,32,49,0.8) 50%, rgba(23,32,49,0.85) 100%);"></div>
     <div class="container">
       <div class="hero-content">
         <h1>All businesses face challenges. <em>Execution decides who wins.</em></h1>
@@ -74,6 +78,24 @@
     </div>
   </section>
 
+  <!-- ========== TRUSTED BY ========== -->
+  <section style="padding:60px 0;background:#fff;border-bottom:1px solid rgba(23,32,49,0.04);">
+    <div class="container">
+      <p style="text-align:center;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(23,32,49,0.4);margin-bottom:32px;">Trusted By Leading Firms &amp; Operators</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:40px 48px;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f21c18856f793a07e_Bonfire.webp" alt="Bonfire" style="height:32px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f8bb26989565e83f0_Campminder.svg" alt="Campminder" style="height:28px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/6a1dc5a850714f27d0bc6ff1_Techstars_Logo_Black.png" alt="Techstars" style="height:28px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f5ee767050566d548_ScaleIP.svg" alt="ScaleIP" style="height:28px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f5ee767050566d543_Longpath.svg" alt="Longpath" style="height:28px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f4a646ee48c832326_HVG.svg" alt="HVG" style="height:28px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f958795aaeedd4449_Syntrinsic.webp" alt="Syntrinsic" style="height:32px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0fbe22c238c42b6c5b_Zesty%20Paws.webp" alt="Zesty Paws" style="height:32px;opacity:0.5;">
+        <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69372e0f1263f08a1b80c02f_90.svg" alt="90" style="height:28px;opacity:0.5;">
+      </div>
+    </div>
+  </section>
+
   <!-- ========== HOW WE HELP ========== -->
   <section class="how-we-help" id="how-we-help">
     <div class="container">
@@ -81,13 +103,13 @@
       <h2 class="section-title">Operations, Capital, and Transformation</h2>
       <div class="services-grid">
         <div class="service-card fade-in">
-          <div class="service-icon">&#9881;</div>
+          <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/693e6f7785fe6122f040a25a_bouldermoss.webp" alt="" style="width:100%;height:240px;object-fit:cover;border-radius:12px;margin-bottom:24px;">
           <h3>Operational Transformation</h3>
           <p>We work with you to implement the Entrepreneurial Operating System (EOS&reg;), a set of tools that dramatically improve strategy and execution.</p>
           <a href="#" class="service-link">View All &rarr;</a>
         </div>
         <div class="service-card fade-in">
-          <div class="service-icon">&#9650;</div>
+          <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/693e6f771fd9354dfb4c4219_teamhike.webp" alt="" style="width:100%;height:240px;object-fit:cover;border-radius:12px;margin-bottom:24px;">
           <h3>Equity Expertise</h3>
           <p>We help you navigate capital decisions with clarity — from choosing the right investors to raising on the right terms, and occasionally investing ourselves.</p>
           <a href="#" class="service-link">View All &rarr;</a>
@@ -249,36 +271,61 @@
           <div class="carousel-slide">
             <div class="testimonial-card">
               <blockquote>&ldquo;Erika is one of the best strategic thinkers I&rsquo;ve ever worked with. Not only is she good at helping to devise a robust business and product strategy, but she is great at embedding that plan into a business.&rdquo;</blockquote>
-              <div class="attribution">Alex Vogenthaler</div>
-              <div class="attribution-title">CEO of GroundedAgents.ai</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;">
+                <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69371b8e31f18bbcf91d53e9__XjMd_Xz_400x400.jpg" alt="Alex Vogenthaler" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+                <div style="text-align:left;">
+                  <div class="attribution">Alex Vogenthaler</div>
+                  <div class="attribution-title">CEO of GroundedAgents.ai</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="testimonial-card">
               <blockquote>&ldquo;Jack is much more than a great EOS implementer. He is a strategic partner and advisor for Oakwood, and challenges us to live up to our potential.&rdquo;</blockquote>
-              <div class="attribution">Ryan Smith</div>
-              <div class="attribution-title">President, Oakwood Homes</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;">
+                <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/696d5a90ebcdea8014a734ee_Ryan%20Smith.jpeg" alt="Ryan Smith" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+                <div style="text-align:left;">
+                  <div class="attribution">Ryan Smith</div>
+                  <div class="attribution-title">President, Oakwood Homes</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="testimonial-card">
               <blockquote>&ldquo;Implementing EOS with Bart has brought clarity to Origin&rsquo;s vision and strengthened the culture we&rsquo;re building. Bart&rsquo;s real-world investor-operator experience makes Meritage an invaluable partner.&rdquo;</blockquote>
-              <div class="attribution">Mary Kay Gondrezick</div>
-              <div class="attribution-title">CEO, Origin CPA Group</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;">
+                <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/696d5bfe9a6a58bbffd82f2b_Mary%20Kay%20Gondrezick.jpeg" alt="Mary Kay Gondrezick" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+                <div style="text-align:left;">
+                  <div class="attribution">Mary Kay Gondrezick</div>
+                  <div class="attribution-title">CEO, Origin CPA Group</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="testimonial-card">
               <blockquote>&ldquo;Jay tailored EOS to our PE/VC reality&mdash;cutting noise, sharpening value creation, and lifting firmwide adoption. One year in, we&rsquo;re driving disciplined, collaborative results across the portfolio.&rdquo;</blockquote>
-              <div class="attribution">Ryan Heckman</div>
-              <div class="attribution-title">Co-founder and Managing Partner, Rallyday Partners</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;">
+                <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/6975ad0e98f6544136e9324d_1693418193727.jpeg" alt="Ryan Heckman" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+                <div style="text-align:left;">
+                  <div class="attribution">Ryan Heckman</div>
+                  <div class="attribution-title">Co-founder and Managing Partner, Rallyday Partners</div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="carousel-slide">
             <div class="testimonial-card">
               <blockquote>&ldquo;I can&rsquo;t recommend Alex Hodgkin highly enough for any ETA operator looking to start the EOS journey.&rdquo;</blockquote>
-              <div class="attribution">Andrew Hitchings</div>
-              <div class="attribution-title">Owner, Colorado Homes Services</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;">
+                <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/696e82790faf949bdca288bb_Andrew%20Hitchings%20Better.jpeg" alt="Andrew Hitchings" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">
+                <div style="text-align:left;">
+                  <div class="attribution">Andrew Hitchings</div>
+                  <div class="attribution-title">Owner, Colorado Homes Services</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -304,19 +351,19 @@
       <h2 class="section-title">Tools and Resources</h2>
       <div class="resources-grid">
         <div class="resource-card fade-in">
-          <span class="resource-icon">&#9881;</span>
+          <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/693e6f775c38ee76efdff803_treemeadow.webp" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:20px;">
           <h3>AI Readiness Tool</h3>
           <p>Successful AI deployment requires a culture and operational system that is ready to support it. Use this tool to evaluate your company&rsquo;s AI readiness.</p>
           <a href="#" class="service-link">View All &rarr;</a>
         </div>
         <div class="resource-card fade-in">
-          <span class="resource-icon">&#9997;</span>
+          <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/697597da7a4fc9e79c742cd0_sproutforest.webp" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:20px;">
           <h3>Learning Center &amp; Blog</h3>
           <p>Browse our favorite business tools and blog posts to help you get what you want out of your business.</p>
           <a href="#" class="service-link">View All &rarr;</a>
         </div>
         <div class="resource-card fade-in">
-          <span class="resource-icon">&#9650;</span>
+          <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/697597dab3d7dbb470bb31f5_stackrocks.webp" alt="" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:20px;">
           <h3>Definition of Growth Equity</h3>
           <p>How the Traction Fund Defines Growth Equity.</p>
           <a href="#" class="service-link">View All &rarr;</a>
@@ -332,27 +379,32 @@
       <h2 class="section-title">Latest Articles</h2>
       <div class="articles-grid">
         <div class="article-card featured fade-in">
+          <img src="https://cdn.prod.website-files.com/6936079300cf5d3e0aa9e9ed/6a14c8f0945e8749b404d898_Climbers%20on%20a%20trail.png" alt="" style="width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:16px;">
           <div class="article-meta">May 26, 2026 &bull; Erika Trautman</div>
           <h3>Techstars and Meritage Are Partnering to Help Founders Build Companies That Scale</h3>
           <p>A new Techstars and Meritage partnership brings EOS to founders, helping teams turn early momentum into the operating discipline needed to scale.</p>
           <a href="#" class="article-link">Read Post &rarr;</a>
         </div>
         <div class="article-card fade-in">
+          <img src="https://cdn.prod.website-files.com/6936079300cf5d3e0aa9e9ed/69aee4a6dc046821df79c613_Laptop%20and%20mountains.jpg" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:12px;">
           <div class="article-meta">Mar 7, 2026 &bull; Erika Trautman</div>
           <h3>The Agentic Workforce Is Here. Is Your Business Ready?</h3>
           <a href="#" class="article-link">Read Post &rarr;</a>
         </div>
         <div class="article-card fade-in">
+          <img src="https://cdn.prod.website-files.com/6936079300cf5d3e0aa9e9ed/69759901afd5a9c2c4379020_sproutforest.webp" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:12px;">
           <div class="article-meta">Jan 26, 2026 &bull; Erika Trautman</div>
           <h3>From Builder to Leader: Why Scalable Companies Require Founders to Let Go</h3>
           <a href="#" class="article-link">Read Post &rarr;</a>
         </div>
         <div class="article-card fade-in">
+          <img src="https://cdn.prod.website-files.com/6936079300cf5d3e0aa9e9ed/697598e15b822a91394c800b_books.webp" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:12px;">
           <div class="article-meta">Dec 12, 2025 &bull; Erika Trautman</div>
           <h3>With a Well Crafted V/TO, Your Pitch Deck Writes Itself</h3>
           <a href="#" class="article-link">Read Post &rarr;</a>
         </div>
         <div class="article-card fade-in">
+          <img src="https://cdn.prod.website-files.com/6936079300cf5d3e0aa9e9ed/6975992ae63f0fe265bb05d4_pathwoods.webp" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:12px;">
           <div class="article-meta">Nov 18, 2025 &bull; Bart Lorang</div>
           <h3>Private Equity Investors and Entrepreneurs: How to Keep Companies on the Right Path</h3>
           <a href="#" class="article-link">Read Post &rarr;</a>
@@ -538,8 +590,14 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="logo">Meritage<span>.</span></div>
+          <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/6935e037676adbb0831c2eea_Meritage%20White.svg" alt="Meritage" style="height:28px;margin-bottom:16px;">
           <p>Execution decides who wins. We partner with select leaders to establish world-class execution through operational discipline, capital fluency, and thoughtful modernization.</p>
+          <div style="display:flex;gap:16px;margin-top:24px;flex-wrap:wrap;">
+            <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69374b62523822343c64ea33_EOS.webp" alt="EOS" style="height:28px;opacity:0.6;">
+            <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69374b6296cdc3d3a98fdc83_StormBreakers.svg" alt="StormBreakers" style="height:28px;opacity:0.6;">
+            <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69374b62aeb0bc318a0fbc08_Meritage%20Accounting.svg" alt="Meritage Accounting" style="height:28px;opacity:0.6;">
+            <img src="https://cdn.prod.website-files.com/6935d10e87bc5329c8ac2db8/69374b62a6f514dd7d210950_Kolbe.svg" alt="Kolbe" style="height:28px;opacity:0.6;">
+          </div>
         </div>
         <div class="footer-col">
           <h4>How We Help</h4>

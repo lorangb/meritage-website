@@ -100,6 +100,9 @@ ul { list-style: none; }
   text-decoration: none;
 }
 .logo span { color: #F5961E; }
+.logo img { transition: opacity 0.3s ease; }
+.scrolled .logo-light { display: none !important; }
+.scrolled .logo-dark { display: block !important; }
 
 /* Nav */
 .main-nav { display: flex; align-items: center; gap: 32px; }
@@ -823,6 +826,7 @@ ul { list-style: none; }
   line-height: 1.7;
   max-width: 280px;
 }
+.footer-brand img { display: block; }
 .footer-col h4 {
   font-size: 13px;
   font-weight: 600;

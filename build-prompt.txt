@@ -1,0 +1,25 @@
+Create files for a beautiful single-page static site for Meritage, a firm that helps entrepreneurs build remarkable organizations through EOS implementation and equity investment. Write them to /tmp/ directory.
+
+Brand tokens:
+- Colors: navy #172031, warm off-white #F3F1EF, amber accent #F5961E, white #FFFFFF
+- Fonts: Instrument Serif (headings), DM Sans (body) from Google Fonts
+- Design: clean, professional, warm Colorado feel
+
+Create these files:
+1. /tmp/index.html - Complete HTML site with all sections
+2. /tmp/styles.css - Full CSS design system (responsive)
+3. /tmp/script.js - All interactivity (nav scroll, tabs, testimonial carousel, FAQ accordion, form validation)
+
+Sections needed:
+- NAV: How We Help, Who We Help, Tools & Resources, About Us, Login, Get Started
+- HERO: "All businesses face challenges. Execution decides who wins." subtext + 2 CTAs + stats bar
+- HOW WE HELP: 2 cards (Operational Transformation/EOS, Equity Expertise)
+- WHO WE HELP: 4-tab system (High-Growth, Exit Seeking, Investment Firms, Complex)
+- WHY US: Partners who show up, 60+ years experience, 500+ companies
+- TESTIMONIALS: 3-slide carousel with client quotes
+- FAQS: 4 items about EOS, location, who they work with
+- CTA BANNER: Dark section with tagline
+- CONTACT: Name, email, phone, company, message form
+- FOOTER: 3-column links, tagline, copyright
+
+Make it beautiful, professional, and fully responsive.

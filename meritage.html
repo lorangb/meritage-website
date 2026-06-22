@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meritage — Execution Decides Who Wins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#172031;
+    --offwhite:#F3F1EF;
+    --amber:#F5961E;
+    --navy-2:#1f2a40;
+    --line:rgba(23,32,49,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'DM Sans',sans-serif;
+    color:var(--navy);
+    background:var(--offwhite);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Instrument Serif',serif;font-weight:400;line-height:1.1;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;}
+  .btn{
+    display:inline-block;font-family:'DM Sans',sans-serif;font-weight:500;font-size:15px;
+    padding:13px 26px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+    transition:all .25s ease;letter-spacing:0.01em;
+  }
+  .btn-amber{background:var(--amber);color:#fff;}
+  .btn-amber:hover{background:#e0830f;transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:rgba(23,32,49,0.25);}
+  .btn-ghost:hover{border-color:var(--navy);}
+  .btn-light{background:#fff;color:var(--navy);}
+  .btn-light:hover{background:#eee;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,241,239,0.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .logo{font-family:'Instrument Serif',serif;font-size:28px;letter-spacing:0.02em;}
+  .logo span{color:var(--amber);}
+  .nav-links{display:flex;align-items:center;gap:30px;}
+  .nav-links a{font-size:14.5px;color:var(--navy);opacity:0.8;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-cta .login{font-size:14.5px;}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;font-size:24px;color:var(--navy);}
+
+  /* HERO */
+  .hero{padding:90px 0 70px;}
+  .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:center;}
+  .hero-eyebrow{font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:18px;}
+  .hero h1{font-size:clamp(42px,6vw,78px);margin-bottom:24px;}
+  .hero h1 em{font-style:italic;color:var(--amber);}
+  .hero p.lead{font-size:19px;color:rgba(23,32,49,0.72);max-width:520px;margin-bottom:32px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .stat{background:var(--offwhite);padding:28px 22px;}
+  .stat .num{font-family:'Instrument Serif',serif;font-size:38px;color:var(--navy);line-height:1;}
+  .stat .lbl{font-size:13px;color:rgba(23,32,49,0.6);margin-top:8px;}
+
+  /* SECTION BASE */
+  section{padding:80px 0;}
+  .section-head{text-align:center;max-width:680px;margin:0 auto 56px;}
+  .section-head .eyebrow{font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:14px;display:block;}
+  .section-head h2{font-size:clamp(32px,4.5vw,50px);margin-bottom:14px;}
+  .section-head p{color:rgba(23,32,49,0.7);font-size:17px;}
+
+  /* HOW WE HELP */
+  .cards-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:40px;
+    transition:transform .3s ease,box-shadow .3s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(23,32,49,0.18);}
+  .card .icon{width:52px;height:52px;border-radius:12px;background:var(--navy);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:24px;}
+  .card h3{font-size:30px;margin-bottom:12px;}
+  .card p{color:rgba(23,32,49,0.7);margin-bottom:20px;}
+  .card ul{list-style:none;}
+  .card ul li{padding:8px 0 8px 26px;position:relative;color:rgba(23,32,49,0.8);font-size:15px;}
+  .card ul li:before{content:"";position:absolute;left:0;top:14px;width:14px;height:2px;background:var(--amber);}
+
+  /* WHO WE HELP - tabs */
+  .tabs-wrap{max-width:980px;margin:0 auto;}
+  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;}
+  .tab{
+    background:transparent;border:1px solid var(--line);border-radius:999px;
+    padding:11px 22px;font-family:'DM Sans';font-size:14.5px;font-weight:500;cursor:pointer;
+    color:var(--navy);transition:all .2s;
+  }
+  .tab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .tab-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:44px;animation:fade .4s ease;}
+  .tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .tab-panel h3{font-size:32px;margin-bottom:14px;}
+  .tab-panel p{color:rgba(23,32,49,0.72);margin-bottom:18px;}
+  .tab-panel ul{list-style:none;}
+  .tab-panel ul li{padding:6px 0 6px 24px;position:relative;font-size:15px;}
+  .tab-panel ul li:before{content:"✓";position:absolute;left:0;color:var(--amber);font-weight:700;}
+  .tab-visual{background:var(--navy);border-radius:14px;height:240px;display:flex;align-items:center;justify-content:center;color:var(--amber);font-family:'Instrument Serif',serif;font-size:60px;}
+
+  /* WHY US */
+  .why{background:var(--navy);color:#fff;}
+  .why .section-head h2,.why .section-head p{color:#fff;}
+  .why .section-head p{color:rgba(255,255,255,0.7);}
+  .why .section-head .eyebrow{color:var(--amber);}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;max-width:980px;margin:0 auto;text-align:center;}
+  .why-num{font-family:'Instrument Serif',serif;font-size:60px;color:var(--amber);line-height:1;}
+  .why-grid p{color:rgba(255,255,255,0.75);margin-top:14px;font-size:15px;}
+
+  /* TESTIMONIALS */
+  .testi{overflow:hidden;}
+  .testi-track{display:flex;transition:transform .5s ease;}
+  .testi-slide{min-width:100%;padding:0 12px;}
+  .testi-card{max-width:820px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:48px;text-align:center;}
+  .testi-card .quote{font-family:'Instrument Serif',serif;font-style:italic;font-size:26px;line-height:1.4;margin-bottom:28px;}
+  .testi-card .person{font-weight:600;font-size:15px;}
+  .testi-card .role{color:rgba(23,32,49,0.6);font-size:14px;}
+  .testi-dots{display:flex;gap:8px;justify-content:center;margin-top:28px;}
+  .testi-dots button{width:9px;height:9px;border-radius:50%;border:none;background:var(--line);cursor:pointer;transition:all .2s;}
+  .testi-dots button.active{background:var(--amber);width:26px;border-radius:999px;}
+
+  /* FAQ */
+  .faq-wrap{max-width:820px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:24px 0;font-family:'Instrument Serif',serif;font-size:23px;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:20px;}
+  .faq-q .pm{font-size:24px;color:var(--amber);transition:transform .3s;flex-shrink:0;}
+  .faq-item.open .pm{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;color:rgba(23,32,49,0.72);font-size:16px;}
+  .faq-a-inner{padding:0 0 24px;}
+  .faq-item.open .faq-a{max-height:300px;}
+
+  /* CTA BANNER */
+  .cta-banner{background:var(--amber);color:#fff;padding:70px 0;}
+  .cta-banner .container{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+  .cta-banner h2{font-size:clamp(30px,4vw,46px);color:#fff;max-width:620px;}
+  .cta-banner .btn{background:var(--navy);color:#fff;}
+  .cta-banner .btn:hover{background:#0e1521;}
+
+  /* CONTACT */
+  .contact{background:var(--navy);color:#fff;}
+  .contact .section-head h2{color:#fff;}
+  .contact .section-head p{color:rgba(255,255,255,0.7);}
+  .contact .section-head .eyebrow{color:var(--amber);}
+  .form-wrap{max-width:680px;margin:0 auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:40px;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .form-group{display:flex;flex-direction:column;margin-bottom:18px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-group label{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:7px;font-weight:500;}
+  .form-group input,.form-group textarea,.form-group select{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;
+    padding:13px 14px;color:#fff;font-family:'DM Sans';font-size:15px;transition:border .2s;
+  }
+  .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.4);}
+  .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--amber);}
+  .form-group textarea{resize:vertical;min-height:120px;}
+  .form-submit{width:100%;margin-top:6px;}
+
+  /* FOOTER */
+  footer{background:#0e1521;color:rgba(255,255,255,0.7);padding:60px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+  .foot-logo{font-family:'Instrument Serif',serif;font-size:26px;color:#fff;margin-bottom:14px;}
+  .foot-logo span{color:var(--amber);}
+  .foot-col h4{font-family:'DM Sans';font-size:13px;text-transform:uppercase;letter-spacing:0.12em;color:#fff;margin-bottom:16px;font-weight:600;}
+  .foot-col a{display:block;padding:6px 0;font-size:14.5px;color:rgba(255,255,255,0.6);transition:color .2s;}
+  .foot-col a:hover{color:var(--amber);}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:rgba(255,255,255,0.5);}
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .nav-links,.nav-cta .login{display:none;}
+    .menu-toggle{display:block;}
+    .nav-links.mobile-open{display:flex;position:absolute;top:72px;left:0;right:0;background:var(--offwhite);flex-direction:column;padding:24px;gap:18px;border-bottom:1px solid var(--line);}
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+    .cards-2{grid-template-columns:1fr;}
+    .tab-panel.active{grid-template-columns:1fr;}
+    .tab-visual{height:180px;font-size:44px;}
+    .why-grid{grid-template-columns:1fr;gap:36px;}
+    .form-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .stats{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .cta-banner .container{flex-direction:column;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">Meritage<span>.</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#how">How We Help</a>
+      <a href="#who">Who We Help</a>
+      <a href="#tools">Tools &amp; Resources</a>
+      <a href="#about">About Us</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="login">Login</a>
+      <a href="#contact" class="btn btn-amber">Get Started</a>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow">Operator-Led Advisory</div>
+      <h1>All businesses face challenges. <em>Execution decides who wins.</em></h1>
+      <p class="lead">Meritage pairs operators with 60+ years of combined experience to help companies run tighter, scale faster, and exit stronger.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-amber">Get Started</a>
+        <a href="#how" class="btn btn-ghost">How We Help</a>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">500+</div><div class="lbl">Companies served</div></div>
+      <div class="stat"><div class="num">80%+</div><div class="lbl">Raised capital</div></div>
+      <div class="stat"><div class="num">Billions</div><div class="lbl">In capital invested</div></div>
+      <div class="stat"><div class="num">Leading</div><div class="lbl">VC &amp; PE firms trust us</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- HOW WE HELP -->
+<section id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How We Help</span>
+      <h2>Two disciplines. One outcome.</h2>
+      <p>We bring the structure operators need and the financial fluency investors expect.</p>
+    </div>
+    <div class="cards-2">
+      <div class="card">
+        <div class="icon">⚙</div>
+        <h3>Operational Transformation</h3>
+        <p>Implement the Entrepreneurial Operating System (EOS) to align leadership, sharpen focus, and drive accountability across every function.</p>
+        <ul>
+          <li>Vision traction organizing</li>
+          <li>Right people, right seats</li>
+          <li>Scorecards &amp; meeting rhythms</li>
+          <li>Issue solving &amp; quarterly rocks</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon">$</div>
+        <h3>Equity Expertise</h3>
+        <p>From capital raises to exits, we structure and execute the transactions that move founders, executives, and investors forward.</p>
+        <ul>
+          <li>Capital raising &amp; deal structuring</li>
+          <li>M&amp;A and sell-side advisory</li>
+          <li>Valuation &amp; diligence support</li>
+          <li>Investor relations strategy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<section id="who" style="background:#fff;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Who We Help</span>
+      <h2>Built for leaders in motion.</h2>
+      <p>Select your situation to see how we engage.</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs">
+        <button class="tab active" data-tab="0">High-Growth Companies</button>
+        <button class="tab" data-tab="1">Entrepreneurs Seeking Exit</button>
+        <button class="tab" data-tab="2">Investment Firms</button>
+        <button class="tab" data-tab="3">Complex Organizations</button>
+      </div>
+
+      <div class="tab-panel active" data-panel="0">
+        <div>
+          <h3>High-Growth Companies</h3>
+          <p>Scale without losing the operational discipline that got you here.</p>
+          <ul>
+            <li>Install EOS to align a growing team</li>
+            <li>Build financial models investors trust</li>
+            <li>Prepare for and raise growth capital</li>
+            <li>Strengthen leadership and reporting</li>
+          </ul>
+        </div>
+        <div class="tab-visual">↗</div>
+      </div>
+
+      <div class="tab-panel" data-panel="1">
+        <div>
+          <h3>Entrepreneurs Seeking Exit</h3>
+          <p>Maximize value and minimize friction when it's time to transition.</p>
+          <ul>
+            <li>Pre-exit readiness assessment</li>
+            <li>Valuation optimization</li>
+            <li>Buyer sourcing &amp; negotiation</li>
+            <li>Deal structuring and close</li>
+          </ul>
+        </div>
+        <div class="tab-visual">⇥</div>
+      </div>
+
+      <div class="tab-panel" data-panel="2">
+        <div>
+          <h3>Investment Firms</h3>
+          <p>Operational partners that help portfolio companies perform.</p>
+          <ul>
+            <li>Value-creation planning</li>
+            <li>Post-close operational integration</li>
+            <li>Portfolio reporting &amp; governance</li>
+            <li>Pre-exit operational diligence</li>
+          </ul>
+        </div>
+        <div class="tab-visual">◆</div>
+      </div>
+
+      <div class="tab-panel" data-panel="3">
+        <div>
+          <h3>Complex Organizations</h3>
+          <p>Bring clarity and momentum to multi-entity, multi-stakeholder environments.</p>
+          <ul>
+            <li>Org design and accountability mapping</li>
+            <li>Process standardization</li>
+            <li>Change management</li>
+            <li>Systems and data alignment</li>
+          </ul>
+        </div>
+        <div class="tab-visual">⌘</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="about">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why Meritage</span>
+      <h2>Operators first. Advisors second.</h2>
+      <p>We've sat in your seat. Our counsel comes from real operational and transactional scars.</p>
+    </div>
+    <div class="why-grid">
+      <div>
+        <div class="why-num">60+</div>
+        <p>Years of combined experience as operators, executives, and dealmakers.</p>
+      </div>
+      <div>
+        <div class="why-num">EOS</div>
+        <p>Certified implementers bringing proven operating discipline to your team.</p>
+      </div>
+      <div>
+        <div class="why-num">∞</div>
+        <p>Long-term partnerships that outlast any single engagement or transaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi" id="tools">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What leaders say.</h2>
+    </div>
+    <div class="testi-track" id="testiTrack">
+      <div class="testi-slide">
+        <div class="testi-card">
+          <p class="quote">"Meritage didn't hand us a deck — they sat in our weekly meetings for six months and rebuilt how we run. We closed our Series B three months ahead of plan."</p>
+          <div class="person">Sarah Lin</div>
+          <div class="role">CEO, LogistiCo</div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <p class="quote">"Their EOS work gave our leadership team a shared language for the first time. The exit process that followed was the cleanest I've ever been part of."</p>
+          <div class="person">Marcus Reyes</div>
+          <div class="role">Founder, Northwind Manufacturing</div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-card">
+          <p class="quote">"As a fund, we trust Meritage with our hardest portfolio companies. They show up as operators, not consultants, and the results speak for themselves."</p>
+          <div class="person">Diane Okafor</div>
+          <div class="role">Partner, Crestline Capital</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots">
+      <button class="active" data-slide="0"></button>
+      <button data-slide="1"></button>
+      <button data-slide="2"></button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:#fff;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q">What is EOS and why does Meritage use it?<span class="pm">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">EOS — the Entrepreneurial Operating System — is a practical framework for running a company: vision, people, data, issues, process, and traction. We use it because it produces measurable, repeatable results fast, without heavy consulting overhead.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Where is Meritage located?<span class="pm">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">We're headquartered in the United States and work with companies across North America. Most engagements are hybrid — on-site for key sessions, remote for the rhythm in between.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you work with companies outside the US?<span class="pm">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. While most of our clients are US-based, we have supported cross-border transactions and remote operational engagements internationally. Reach out and we'll confirm fit.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long does a typical EOS engagement last?<span class="pm">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">A full EOS implementation typically runs 18–24 months with biweekly sessions, though clients see traction within the first quarter. We tailor cadence and scope to your stage and team.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to make execution your edge?</h2>
+    <a href="#contact" class="btn">Get Started</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Contact</span>
+      <h2>Let's talk.</h2>
+      <p>Tell us where you are and where you want to go. We'll respond within two business days.</p>
+    </div>
+    <div class="form-wrap">
+      <form onsubmit="event.preventDefault();alert('Thanks — we will be in touch shortly.');this.reset();">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Company Inc.">
+          </div>
+          <div class="form-group full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your situation..." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-amber form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Meritage<span>.</span></div>
+        <p>Operator-led advisory for companies that refuse to let execution be the thing that holds them back.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#how">How We Help</a>
+        <a href="#who">Who We Help</a>
+        <a href="#about">About Us</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="#tools">Tools &amp; Resources</a>
+        <a href="#">Blog</a>
+        <a href="#">Case Studies</a>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <a href="#contact">Contact</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Login</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Meritage. All rights reserved.</div>
+      <div>Privacy · Terms</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  document.getElementById('menuToggle').addEventListener('click',function(){
+    document.getElementById('navLinks').classList.toggle('mobile-open');
+  });
+
+  // Tabs
+  const tabs=document.querySelectorAll('.tab');
+  const panels=document.querySelectorAll('.tab-panel');
+  tabs.forEach(t=>t.addEventListener('click',function(){
+    tabs.forEach(x=>x.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelector('[data-panel="'+this.dataset.tab+'"]').classList.add('active');
+  }));
+
+  // Testimonials carousel
+  const track=document.getElementById('testiTrack');
+  const dots=document.querySelectorAll('#testiDots button');
+  let cur=0;
+  function goSlide(i){cur=i;track.style.transform='translateX(-'+i*100+'%)';dots.forEach((d,idx)=>d.classList.toggle('active',idx===i));}
+  dots.forEach(d=>d.addEventListener('click',function(){goSlide(parseInt(this.dataset.slide));}));
+  setInterval(()=>{goSlide((cur+1)%dots.length);},6000);
+
+  // FAQ
+  document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',function(){
+    const item=this.parentElement;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
+  }));
+</script>
+</body>
+</html>
