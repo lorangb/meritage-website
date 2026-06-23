@@ -401,8 +401,8 @@ ul { list-style: none; }
 }
 .tab-testimonial {
   background: rgba(245, 150, 30, 0.05);
-  border-left: 3px solid #F5961E;
-  padding: 32px;
+  border-left: 2px solid rgba(245, 150, 30, 0.3);
+  padding: 28px;
   border-radius: 0 12px 12px 0;
 }
 .tab-testimonial blockquote {
@@ -754,7 +754,7 @@ ul { list-style: none; }
   margin-top: 40px;
   padding: 24px;
   background: rgba(245, 150, 30, 0.06);
-  border-left: 3px solid #F5961E;
+  border-left: 2px solid rgba(245, 150, 30, 0.3);
   border-radius: 0 12px 12px 0;
 }
 .contact-testimonial blockquote {
