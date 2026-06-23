@@ -36,7 +36,7 @@ ul { list-style: none; }
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--orange);
+  color: #d47d0a;
   margin-bottom: 16px;
 }
 .section-title {
@@ -214,7 +214,7 @@ ul { list-style: none; }
 }
 .hero p {
   font-size: clamp(16px, 1.5vw, 20px);
-  color: rgba(243, 241, 239, 0.75);
+  color: rgba(243, 241, 239, 0.85);
   line-height: 1.7;
   margin-bottom: 40px;
   max-width: 580px;
@@ -239,7 +239,7 @@ ul { list-style: none; }
 }
 .hero-stat-label {
   font-size: 13px;
-  color: rgba(243, 241, 239, 0.6);
+  color: rgba(243, 241, 239, 0.65);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -288,10 +288,10 @@ ul { list-style: none; }
 }
 .service-link {
   font-size: 14px; font-weight: 600;
-  color: #F5961E; display: inline-flex; align-items: center; gap: 6px;
-  transition: gap 0.2s;
+  color: #d47d0a; display: inline-flex; align-items: center; gap: 6px;
+  transition: gap 0.2s, color 0.2s;
 }
-.service-link:hover { gap: 10px; }
+.service-link:hover { gap: 10px; color: var(--orange); }
 
 /* Mega Menu Nav Styling */
 .has-mega { position: relative; }
@@ -381,7 +381,7 @@ ul { list-style: none; }
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #F5961E;
+  color: #d47d0a;
   margin-bottom: 20px;
   display: block;
 }
@@ -646,7 +646,7 @@ ul { list-style: none; }
 .article-link {
   font-size: 14px;
   font-weight: 600;
-  color: #F5961E;
+  color: #d47d0a;
   display: inline-flex; align-items: center; gap: 6px;
 }
 
@@ -696,7 +696,7 @@ ul { list-style: none; }
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
+  transition: max-height 0.4s ease;
 }
 .faq-item.open .faq-answer {
   max-height: 500px;
@@ -716,7 +716,7 @@ ul { list-style: none; }
   color: rgba(23, 32, 49, 0.5);
 }
 .faq-cta a {
-  color: #F5961E;
+  color: #d47d0a;
   font-weight: 600;
   text-decoration: underline;
 }
